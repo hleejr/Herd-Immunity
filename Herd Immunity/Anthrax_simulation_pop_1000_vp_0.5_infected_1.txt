@@ -1,0 +1,7 @@
+parameters:Population Size: 1000	Percent Vaccinated: 0.5	Virus: Anthrax	mortality_rate: 0.2	Basic Reproduction Number: 0.325	Initially infected: 1
+****time step 0 starting**** 
+Person-0 was not able to infect Person-875 by pure luck
+Person-0 survived and is now vaccinated
+Next wave of infected: 
+****time step 0 Ending**** 
+The Infection has been eradicated, there were 1000 people left
