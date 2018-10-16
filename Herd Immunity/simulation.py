@@ -2,12 +2,11 @@ import random
 import sys
 from viruses import viruses
 import virus
-random.seed(42)
+random.seed(43)
 from person import Person
 from logger import Logger
 
-class Simulation(object):
-    '''
+'''
     Main class that will run the herd immunity simulation program.  Expects initialization
     parameters passed as command line arguments when file is run.
     Simulates the spread of a virus through a given population.  The percentage of the
@@ -53,8 +52,10 @@ class Simulation(object):
             self.vacc_percentage, new person object will be created with is_vaccinated
             set to True.  Otherwise, is_vaccinated will be set to False.
         -- Once len(population) is the same as self.population_size, returns population.
-    '''
+'''
 
+class Simulation(object):
+    
     def __init__(self, population_size, vacc_percentage, virus, initial_infected=1):
         self.population_size = population_size
         self.population = []
@@ -74,7 +75,9 @@ class Simulation(object):
         # TODO: Create a Logger object and bind it to self.logger.  You should use this
         # logger object to log all events of any importance during the simulation.  Don't forget
         # to call these logger methods in the corresponding parts of the simulation!
+        print("Logger start")
         self.logger = Logger(self.file_name)
+        print('logger start')
         self.logger.write_metadata(self.population_size, vacc_percentage, self.virus_name,
                      self.mortality_rate, self.basic_repro_num, initial_infected)
 
@@ -105,7 +108,6 @@ class Simulation(object):
                 # TODO: Create all the infected people first, and then worry about the rest.
                 # Don't forget to increment infected_count every time you create a
                 # new infected person!
-                pass
             else:
                 if(random.random()<=vacc_percentage):
                     population.append(Person(i,True))
@@ -117,7 +119,6 @@ class Simulation(object):
                 # 0 and 1.  If this number is smaller than vacc_percentage, this person
                 # should be created as a vaccinated person. If not, the person should be
                 # created as an unvaccinated person.
-                pass
             # TODO: After any Person object is created, whether sick or healthy,
             # you will need to increment self.next_person_id by 1. Each Person object's
             # ID has to be unique!
@@ -164,17 +165,18 @@ class Simulation(object):
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.  At the end of each iteration of this loop, remember
         # to rebind should_continue to another call of self._simulation_should_continue()!
-            pass
         print('The simulation has ended after {} turns.'.format(time_step_counter))
 
     def time_step(self,time_step_counter):
         for person in self.all_infected:
+            for i in range(100):
                 person2 = self.all_alive[random.randint(0,len(self.all_alive)-1)]
                 self.interaction(self.population[person],self.population[person2])
 
         self._kill_infected()
         self._infect_newly_infected()
         self.logger.log_time_step(time_step_counter,False)
+
 
         # TODO: Finish this method!  This method should contain all the basic logic
         # for computing one time step in the simulation.  This includes:
